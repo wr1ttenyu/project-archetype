@@ -25,5 +25,11 @@
             <artifactId>project-archetype-common-util</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>wr1ttenyu.f1nal.study</groupId>
+            <artifactId>project-archetype-common-service-integration</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

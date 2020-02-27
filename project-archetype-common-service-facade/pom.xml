@@ -13,5 +13,11 @@
     <artifactId>project-archetype-common-service-facade</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>wr1ttenyu.f1nal.study</groupId>
+            <artifactId>project-archetype-biz-prod</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
