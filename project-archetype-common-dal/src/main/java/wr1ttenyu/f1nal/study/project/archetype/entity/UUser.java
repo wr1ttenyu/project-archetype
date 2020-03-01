@@ -5,7 +5,7 @@ public class UUser {
 
     private String name;
 
-    private Byte age;
+    private Integer age;
 
     public String getId() {
         return id;
@@ -23,11 +23,20 @@ public class UUser {
         this.name = name == null ? null : name.trim();
     }
 
-    public Byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Byte age) {
+    public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "UUser{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

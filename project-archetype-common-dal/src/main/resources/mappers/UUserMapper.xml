@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="wr1ttenyu.f1nal.study.project.archetype.entity.UUser">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="age" jdbcType="INTEGER" property="age" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
