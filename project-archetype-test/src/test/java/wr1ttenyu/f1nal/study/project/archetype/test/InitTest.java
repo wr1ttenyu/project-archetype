@@ -30,7 +30,7 @@ public class InitTest {
 
     @Test
     public void testUserService() {
-        UserModel user = userService.getOrSaveUserByNameAndAge("二憨子", 28);
+        UserModel user = userService.getOrSaveUserByNameAndAge("二憨子6", 15);
         Assert.assertNotNull(user);
     }
 }

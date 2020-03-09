@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import wr1ttenyu.f1nal.study.project.archetype.dao.UUserMapper;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public UserModel insertUserRecord(UserModel model) {
         logger.info("新增用户，model:{}", model);
         if (model == null) return null;
@@ -37,6 +39,9 @@ public class UserServiceImpl implements UserService {
             model.setId(UUIDGenerator.generate());
         }
         userMapper.insert(UserModel.convertModelToDo(model));
+        if(Integer.valueOf(15).equals(model.getAge())) {
+            throw new RuntimeException("test");
+        }
         return model;
     }
 
@@ -52,8 +57,15 @@ public class UserServiceImpl implements UserService {
             user.setName(name);
             user.setAge(age);
             userMapper.insert(user);
-            return UserModel.convertDoToModel(user);
         }
+
+        UserModel user = new UserModel();
+        user.setId(UUIDGenerator.generate());
+        user.setName("test1");
+        user.setAge(15);
+        insertUserRecord(user);
+
+        users = userMapper.selectByExample(example);
         return UserModel.convertDoToModel(users.get(0));
     }
 }

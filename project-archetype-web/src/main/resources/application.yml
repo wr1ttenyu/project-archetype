@@ -4,7 +4,7 @@ server:
     context-path: /project-archetype
 
 mybatis:
-  mapperLocations: classpath:mappers/*.xml
+  mapperLocations: classpath:mybatis/mappers/*.xml
   configuration:
     cache-enabled: false # mybatis 是否开启全局二级缓存
 

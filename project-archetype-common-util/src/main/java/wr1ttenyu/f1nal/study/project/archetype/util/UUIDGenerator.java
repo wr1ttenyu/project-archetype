@@ -12,6 +12,10 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * yyyyMMddHHmmssSSS  + IP forma + uuid 生产者序号 +  String.valueOf(System.nanoTime())  后3位长度 + 原子增加的 short
+ * 17				   +    6     +    1            +  3 											+ 5	               =  32
+ */
 public class UUIDGenerator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UUIDGenerator.class);
@@ -160,7 +164,6 @@ public class UUIDGenerator {
 
                     synchronized (ID_CONTAINER) {
                         ID_CONTAINER.add(str);
-                        //LOGGER.info("生成主键后缀"+str);
                         if (ID_CONTAINER.size() > MAX_ID_CONTAINER_SIZE) {
                             creating.set(false);
                             LOGGER.info("当前容器已达最大容量 生产者暂停" + this.index);
