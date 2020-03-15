@@ -39,8 +39,10 @@ public class UserServiceImpl implements UserService {
             model.setId(UUIDGenerator.generate());
         }
         userMapper.insert(UserModel.convertModelToDo(model));
-        if(Integer.valueOf(15).equals(model.getAge())) {
-            throw new RuntimeException("test");
+        if (Integer.valueOf(15).equals(model.getAge())) {
+            RuntimeException test = new RuntimeException("test");
+            logger.error("出现业务异常，errInfo；{}", test);
+            throw test;
         }
         return model;
     }
