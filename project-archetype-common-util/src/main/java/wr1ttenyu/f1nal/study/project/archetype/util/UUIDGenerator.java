@@ -112,6 +112,7 @@ public class UUIDGenerator {
         if (suffix != null) {
             return getCurrentTimeStampStr() + suffix;
         } else {
+            // TODO new Random() 可以用 ThreadLocalRandom 代替
             return getCurrentTimeStampStr() + createUUIDSuffix(new Random().nextInt(DEFAULT_PRODUCER_SIZE));
         }
     }
