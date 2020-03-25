@@ -13,6 +13,7 @@ import wr1ttenyu.f1nal.study.project.archetype.entity.UUserExample;
 import wr1ttenyu.f1nal.study.project.archetype.model.UserModel;
 import wr1ttenyu.f1nal.study.project.archetype.service.UserService;
 import wr1ttenyu.f1nal.study.project.archetype.util.UUIDGenerator;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.BusinessResponseEnum;
 
 import java.util.List;
 
@@ -31,7 +32,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public UserModel insertUserRecord(UserModel model) {
         logger.info("新增用户，model:{}", model);
         if (model == null) return null;
@@ -39,35 +39,14 @@ public class UserServiceImpl implements UserService {
             model.setId(UUIDGenerator.generate());
         }
         userMapper.insert(UserModel.convertModelToDo(model));
-        if (Integer.valueOf(15).equals(model.getAge())) {
-            RuntimeException test = new RuntimeException("test");
-            logger.error("出现业务异常，errInfo；{}", test);
-            throw test;
-        }
         return model;
     }
 
     @Override
-    @Transactional
     public UserModel getOrSaveUserByNameAndAge(String name, Integer age) {
         UUserExample example = new UUserExample();
         example.createCriteria().andNameEqualTo(name);
         List<UUser> users = userMapper.selectByExample(example);
-        if (users.size() == 0) {
-            UUser user = new UUser();
-            user.setId(UUIDGenerator.generate());
-            user.setName(name);
-            user.setAge(age);
-            userMapper.insert(user);
-        }
-
-        UserModel user = new UserModel();
-        user.setId(UUIDGenerator.generate());
-        user.setName("test1");
-        user.setAge(15);
-        insertUserRecord(user);
-
-        users = userMapper.selectByExample(example);
         return UserModel.convertDoToModel(users.get(0));
     }
 }
