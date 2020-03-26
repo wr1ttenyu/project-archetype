@@ -1,4 +1,4 @@
-package wr1ttenyu.f1nal.study.project.archetype.util.common.exception.response;
+package wr1ttenyu.f1nal.study.project.archetype.util.common.response;
 
 /**
  * <p>错误返回结果</p>
@@ -7,9 +7,6 @@ package wr1ttenyu.f1nal.study.project.archetype.util.common.exception.response;
  * @date 2019/5/2
  */
 public class ErrorResponse extends BaseResponse {
-
-    public ErrorResponse() {
-    }
 
     public ErrorResponse(int code, String message) {
         super(code, message);

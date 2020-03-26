@@ -1,4 +1,4 @@
-package wr1ttenyu.f1nal.study.project.archetype.util.common.exception.response;
+package wr1ttenyu.f1nal.study.project.archetype.util.common.response;
 
 import lombok.Data;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.CommonResponseEnum;
@@ -12,6 +12,7 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEn
  */
 @Data
 public class BaseResponse {
+
     /**
      * 返回码
      */
@@ -21,14 +22,6 @@ public class BaseResponse {
      */
     protected String message;
 
-    public BaseResponse() {
-        // 默认创建成功的回应
-        this(CommonResponseEnum.SUCCESS);
-    }
-
-    public BaseResponse(IResponseEnum responseEnum) {
-        this(responseEnum.getCode(), responseEnum.getMessage());
-    }
 
     public BaseResponse(int code, String message) {
         this.code = code;

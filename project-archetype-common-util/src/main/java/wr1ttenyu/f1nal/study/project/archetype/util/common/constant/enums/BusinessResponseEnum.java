@@ -3,7 +3,7 @@ package wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BusinessException;
-import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.CommonExceptionAssert;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.BusinessExceptionAssert;
 
 /**
  * <p>业务异常</p>
@@ -11,7 +11,7 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.C
  */
 @Getter
 @AllArgsConstructor
-public enum BusinessResponseEnum implements CommonExceptionAssert {
+public enum BusinessResponseEnum implements BusinessExceptionAssert {
 
     /**
      * 4***，对应{@link BusinessException}，系统业务处理异常

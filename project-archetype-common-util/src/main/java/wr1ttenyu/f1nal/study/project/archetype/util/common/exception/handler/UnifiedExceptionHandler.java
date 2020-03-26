@@ -5,7 +5,6 @@ import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -32,8 +31,8 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.Common
 import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.ServletResponseEnum;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BaseException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BusinessException;
-import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.i18n.UnifiedMessageSource;
-import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.response.ErrorResponse;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.i18n.UnifiedMessageSource;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.response.ErrorResponse;
 
 /**
  * <p>全局异常处理器</p>
@@ -45,7 +44,6 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.response.Er
 @Component
 @ControllerAdvice
 @ConditionalOnWebApplication
-@ConditionalOnMissingBean(UnifiedExceptionHandler.class)
 public class UnifiedExceptionHandler {
     /**
      * 生产环境
@@ -122,8 +120,6 @@ public class UnifiedExceptionHandler {
             TypeMismatchException.class,
             HttpMessageNotReadableException.class,
             HttpMessageNotWritableException.class,
-            // BindException.class,
-            // MethodArgumentNotValidException.class
             ServletRequestBindingException.class,
             ConversionNotSupportedException.class,
             MissingServletRequestPartException.class,

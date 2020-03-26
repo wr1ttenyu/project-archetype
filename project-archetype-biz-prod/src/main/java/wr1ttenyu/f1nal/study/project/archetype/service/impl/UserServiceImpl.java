@@ -27,8 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UUser getUserById(String id) {
-        if (StringUtils.isEmpty(id)) return null;
-        return userMapper.selectByPrimaryKey(id);
+        UUser user = userMapper.selectByPrimaryKey(id);
+        BusinessResponseEnum.USER_NOT_FOUND.assertNotNull(user);
+        return user;
     }
 
     @Override

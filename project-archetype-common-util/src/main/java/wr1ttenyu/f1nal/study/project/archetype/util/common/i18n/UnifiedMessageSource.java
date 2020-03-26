@@ -1,4 +1,4 @@
-package wr1ttenyu.f1nal.study.project.archetype.util.common.exception.i18n;
+package wr1ttenyu.f1nal.study.project.archetype.util.common.i18n;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

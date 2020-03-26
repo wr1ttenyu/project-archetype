@@ -6,7 +6,7 @@ import lombok.Getter;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.ArgumentException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BaseException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.CommonExceptionAssert;
-import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.response.BaseResponse;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.response.BaseResponse;
 
 /**
  * <p>通用返回结果</p>
