@@ -1,14 +1,23 @@
 package wr1ttenyu.f1nal.study.project.archetype.util.common.response;
 
+import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEnum;
+
 /**
  * <p>错误返回结果</p>
- *
- * @author sprainkle
- * @date 2019/5/2
  */
 public class ErrorResponse extends BaseResponse {
 
-    public ErrorResponse(int code, String message) {
-        super(code, message);
+    public static ErrorResponse errorResponse(IResponseEnum responseEnum) {
+        ErrorResponse response = new ErrorResponse();
+        response.setCode(responseEnum.getCode());
+        response.setMessage(responseEnum.getMessage());
+        return response;
+    }
+
+    public static ErrorResponse errorResponse(IResponseEnum responseEnum, String errMsg) {
+        ErrorResponse response = new ErrorResponse();
+        response.setCode(responseEnum.getCode());
+        response.setMessage(errMsg);
+        return response;
     }
 }

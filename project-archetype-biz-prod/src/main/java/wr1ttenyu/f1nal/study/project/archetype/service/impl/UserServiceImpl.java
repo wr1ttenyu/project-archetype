@@ -26,10 +26,10 @@ public class UserServiceImpl implements UserService {
     private UUserMapper userMapper;
 
     @Override
-    public UUser getUserById(String id) {
+    public UserModel getUserById(String id) {
         UUser user = userMapper.selectByPrimaryKey(id);
         BusinessResponseEnum.USER_NOT_FOUND.assertNotNull(user);
-        return user;
+        return UserModel.convertDoToModel(user);
     }
 
     @Override

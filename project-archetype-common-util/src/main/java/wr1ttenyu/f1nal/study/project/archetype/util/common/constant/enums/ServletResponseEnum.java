@@ -2,6 +2,7 @@ package wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEnum;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Getter
 @AllArgsConstructor
-public enum ServletResponseEnum {
+public enum ServletResponseEnum implements IResponseEnum {
     MethodArgumentNotValidException(4400, "", HttpServletResponse.SC_BAD_REQUEST),
     MethodArgumentTypeMismatchException(4400, "", HttpServletResponse.SC_BAD_REQUEST),
     MissingServletRequestPartException(4400, "", HttpServletResponse.SC_BAD_REQUEST),
@@ -39,6 +40,7 @@ public enum ServletResponseEnum {
      * 返回信息，直接读取异常的message
      */
     private String message;
+
     /**
      * HTTP状态码
      */

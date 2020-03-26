@@ -31,14 +31,12 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.Common
 import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.ServletResponseEnum;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BaseException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BusinessException;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEnum;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.i18n.UnifiedMessageSource;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.response.ErrorResponse;
 
 /**
  * <p>全局异常处理器</p>
- *
- * @author sprainkle
- * @date 2019/5/2
  */
 @Slf4j
 @Component
@@ -87,7 +85,7 @@ public class UnifiedExceptionHandler {
     public ErrorResponse handleBusinessException(BaseException e) {
         log.error(e.getMessage(), e);
 
-        return new ErrorResponse(e.getResponseEnum().getCode(), getMessage(e));
+        return ErrorResponse.errorResponse(e.getResponseEnum(), getMessage(e));
     }
 
     /**
@@ -101,7 +99,7 @@ public class UnifiedExceptionHandler {
     public ErrorResponse handleBaseException(BaseException e) {
         log.error(e.getMessage(), e);
 
-        return new ErrorResponse(e.getResponseEnum().getCode(), getMessage(e));
+        return ErrorResponse.errorResponse(e.getResponseEnum(), getMessage(e));
     }
 
     /**
@@ -128,23 +126,23 @@ public class UnifiedExceptionHandler {
     @ResponseBody
     public ErrorResponse handleServletException(Exception e) {
         log.error(e.getMessage(), e);
-        int code = CommonResponseEnum.SERVER_ERROR.getCode();
+        IResponseEnum serverError = CommonResponseEnum.SERVER_ERROR;
         try {
             ServletResponseEnum servletExceptionEnum = ServletResponseEnum.valueOf(e.getClass().getSimpleName());
-            code = servletExceptionEnum.getCode();
+            serverError = servletExceptionEnum;
         } catch (IllegalArgumentException e1) {
             log.error("class [{}] not defined in enum {}", e.getClass().getName(), ServletResponseEnum.class.getName());
         }
 
         if (ENV_PROD.equals(profile)) {
             // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如404.
-            code = CommonResponseEnum.SERVER_ERROR.getCode();
+            serverError = CommonResponseEnum.SERVER_ERROR;
             BaseException baseException = new BaseException(CommonResponseEnum.SERVER_ERROR);
             String message = getMessage(baseException);
-            return new ErrorResponse(code, message);
+            return ErrorResponse.errorResponse(serverError, message);
         }
 
-        return new ErrorResponse(code, e.getMessage());
+        return ErrorResponse.errorResponse(serverError, e.getMessage());
     }
 
 
@@ -194,7 +192,7 @@ public class UnifiedExceptionHandler {
 
         }
 
-        return new ErrorResponse(ArgumentResponseEnum.VALID_ERROR.getCode(), msg.substring(2));
+        return ErrorResponse.errorResponse(ArgumentResponseEnum.VALID_ERROR, msg.substring(2));
     }
 
     /**
@@ -210,13 +208,12 @@ public class UnifiedExceptionHandler {
 
         if (ENV_PROD.equals(profile)) {
             // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.
-            int code = CommonResponseEnum.SERVER_ERROR.getCode();
             BaseException baseException = new BaseException(CommonResponseEnum.SERVER_ERROR);
             String message = getMessage(baseException);
-            return new ErrorResponse(code, message);
+            return ErrorResponse.errorResponse(CommonResponseEnum.SERVER_ERROR, message);
         }
 
-        return new ErrorResponse(CommonResponseEnum.SERVER_ERROR.getCode(), e.getMessage());
+        return ErrorResponse.errorResponse(CommonResponseEnum.SERVER_ERROR, e.getMessage());
     }
 
 }
