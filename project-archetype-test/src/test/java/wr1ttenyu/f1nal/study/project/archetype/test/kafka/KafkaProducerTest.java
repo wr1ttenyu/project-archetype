@@ -3,8 +3,7 @@ package wr1ttenyu.f1nal.study.project.archetype.test.kafka;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class KafkaProducerTest {
@@ -27,10 +26,15 @@ public class KafkaProducerTest {
         connectInfo.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         connectInfo.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
+        // 添加分区器
         /*connectInfo.put("partitioner.class", "wr1ttenyu.f1nal.study.project.archetype.test.kafka.MyPartitioner");*/
 
+        // 添加拦截器
+        List<String> interceptors = Arrays.asList("wr1ttenyu.f1nal.study.project.archetype.test.kafka.TimeInterceptor");
+        connectInfo.put("interceptor.classes", interceptors);
+
         KafkaProducer<String, String> producer = new KafkaProducer<>(connectInfo);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5000; i++) {
             producer.send(new ProducerRecord<>("wr1-kafka-topic-first", "wr1ttenyu-first--" + i, "wr1ttenyu--first--" + i), (recordMetadata, e) -> {
                 if (e == null) {
                     System.out.println("partition : " + recordMetadata.partition() + " offset : " + recordMetadata.offset());
