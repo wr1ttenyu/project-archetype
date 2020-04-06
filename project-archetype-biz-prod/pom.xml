@@ -44,8 +44,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
+            <groupId>wr1ttenyu.tinyplat.springboot.starter</groupId>
+            <artifactId>kafka</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -48,10 +48,11 @@
         <lombok.version>1.18.8</lombok.version>
         <mybatis.spring.boot.start.version>2.1.0</mybatis.spring.boot.start.version>
         <alibaba.druid.version>1.1.20</alibaba.druid.version>
-        <!--<mysql.connector.version>5.1.31</mysql.connector.version>-->
-        <mysql.connector.version>8.0.15</mysql.connector.version>
+        <mysql.connector.version>5.1.31</mysql.connector.version>
+        <!--<mysql.connector.version>8.0.15</mysql.connector.version>-->
         <druid.spring.boot.start.version>1.1.10</druid.spring.boot.start.version>
         <com.alibaba.fastjson.version>1.2.62</com.alibaba.fastjson.version>
+        <wr1ttenyu.tinyplat.springboot.starter.kafka.version>1.0-SNAPSHOT</wr1ttenyu.tinyplat.springboot.starter.kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -104,6 +105,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${com.alibaba.fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>wr1ttenyu.tinyplat.springboot.starter</groupId>
+                <artifactId>kafka</artifactId>
+                <version>${wr1ttenyu.tinyplat.springboot.starter.kafka.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
