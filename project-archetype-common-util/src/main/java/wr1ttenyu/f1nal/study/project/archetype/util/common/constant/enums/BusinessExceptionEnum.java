@@ -11,7 +11,7 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.B
  */
 @Getter
 @AllArgsConstructor
-public enum BusinessResponseEnum implements BusinessExceptionAssert {
+public enum BusinessExceptionEnum implements BusinessExceptionAssert {
 
     /**
      * 4***，对应{@link BusinessException}，系统业务处理异常

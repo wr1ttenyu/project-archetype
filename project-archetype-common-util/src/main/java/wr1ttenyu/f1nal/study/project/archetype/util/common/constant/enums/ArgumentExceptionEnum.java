@@ -9,7 +9,7 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.C
  */
 @Getter
 @AllArgsConstructor
-public enum ArgumentResponseEnum implements CommonExceptionAssert {
+public enum ArgumentExceptionEnum implements CommonExceptionAssert {
 
     /**
      * 绑定参数校验异常

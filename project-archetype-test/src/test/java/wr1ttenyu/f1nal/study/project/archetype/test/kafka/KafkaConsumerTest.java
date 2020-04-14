@@ -34,6 +34,7 @@ public class KafkaConsumerTest /*extends BaseTest */ {
 
         for (int i = 0; ; i++) {
             System.out.println("--------------------第" + i + "次开始拉取消息--------------------");
+            consumer.paused();
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(3));
             System.out.println("--------------------拉取了" + records.count() + "条消息--------------------");
             for (ConsumerRecord<String, String> record : records) {

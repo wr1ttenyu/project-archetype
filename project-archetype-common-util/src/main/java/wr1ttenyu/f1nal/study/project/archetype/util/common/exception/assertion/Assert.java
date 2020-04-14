@@ -13,6 +13,7 @@ import java.util.Map;
  * @date 2019/5/2
  */
 public interface Assert {
+
     /**
      * 创建异常
      * @param args

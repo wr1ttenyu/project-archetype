@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import wr1ttenyu.f1nal.study.project.archetype.dao.UUserMapper;
 import wr1ttenyu.f1nal.study.project.archetype.entity.UUser;
@@ -13,7 +11,7 @@ import wr1ttenyu.f1nal.study.project.archetype.entity.UUserExample;
 import wr1ttenyu.f1nal.study.project.archetype.model.UserModel;
 import wr1ttenyu.f1nal.study.project.archetype.service.UserService;
 import wr1ttenyu.f1nal.study.project.archetype.util.UUIDGenerator;
-import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.BusinessResponseEnum;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.BusinessExceptionEnum;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel getUserById(String id) {
         UUser user = userMapper.selectByPrimaryKey(id);
-        BusinessResponseEnum.USER_NOT_FOUND.assertNotNull(user);
+        BusinessExceptionEnum.USER_NOT_FOUND.assertNotNull(user);
         return UserModel.convertDoToModel(user);
     }
 

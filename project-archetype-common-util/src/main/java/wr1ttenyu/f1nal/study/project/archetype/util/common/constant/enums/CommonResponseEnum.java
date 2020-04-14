@@ -37,8 +37,7 @@ public enum CommonResponseEnum implements CommonExceptionAssert {
     TIME_NOT_NULL(5001, "时间不能为空"),
     DATE_PATTERN_MISMATCH(5002, "日期[%s]与格式[%s]不匹配，无法解析"),
     PATTERN_NOT_NULL(5003, "日期格式不能为空"),
-    PATTERN_INVALID(5003, "日期格式[%s]无法识别"),
-    ;
+    PATTERN_INVALID(5003, "日期格式[%s]无法识别");
 
     /**
      * 返回码

@@ -10,13 +10,18 @@ import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFa
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.web.context.ConfigurableWebApplicationContext;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import wr1ttenyu.f1nal.study.project.archetype.gracefulshutdown.GracefulShutdownUndertowWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-public class AppWebConfiguration {
+@EnableWebMvc
+public class AppWebConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private GracefulShutdownUndertowWrapper gracefulShutdownUndertowWrapper;

@@ -26,9 +26,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.ArgumentResponseEnum;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.ArgumentExceptionEnum;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.CommonResponseEnum;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.ServletResponseEnum;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.ArgumentException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BaseException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BusinessException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEnum;
@@ -98,7 +99,6 @@ public class UnifiedExceptionHandler {
     @ResponseBody
     public ErrorResponse handleBaseException(BaseException e) {
         log.error(e.getMessage(), e);
-
         return ErrorResponse.errorResponse(e.getResponseEnum(), getMessage(e));
     }
 
@@ -156,7 +156,6 @@ public class UnifiedExceptionHandler {
     @ResponseBody
     public ErrorResponse handleBindException(BindException e) {
         log.error("参数绑定校验异常", e);
-
         return wrapperBindingResult(e.getBindingResult());
     }
 
@@ -170,7 +169,6 @@ public class UnifiedExceptionHandler {
     @ResponseBody
     public ErrorResponse handleValidException(MethodArgumentNotValidException e) {
         log.error("参数绑定校验异常", e);
-
         return wrapperBindingResult(e.getBindingResult());
     }
 
@@ -192,7 +190,7 @@ public class UnifiedExceptionHandler {
 
         }
 
-        return ErrorResponse.errorResponse(ArgumentResponseEnum.VALID_ERROR, msg.substring(2));
+        return ErrorResponse.errorResponse(ArgumentExceptionEnum.VALID_ERROR, msg.substring(2));
     }
 
     /**

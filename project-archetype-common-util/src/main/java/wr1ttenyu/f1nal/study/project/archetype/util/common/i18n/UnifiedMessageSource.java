@@ -19,7 +19,6 @@ public class UnifiedMessageSource {
      * @return
      */
     public String getMessage(String code) {
-
         return getMessage(code, null);
     }
 
@@ -30,7 +29,6 @@ public class UnifiedMessageSource {
      * @return
      */
     public String getMessage(String code, Object[] args) {
-
         return getMessage(code, args, "");
     }
 
@@ -43,7 +41,6 @@ public class UnifiedMessageSource {
      */
     public String getMessage(String code, Object[] args, String defaultMessage) {
         Locale locale = LocaleContextHolder.getLocale();
-
         return messageSource.getMessage(code, args, defaultMessage, locale);
     }
 }
