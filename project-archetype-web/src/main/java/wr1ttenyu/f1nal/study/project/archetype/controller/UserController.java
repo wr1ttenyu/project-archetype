@@ -1,13 +1,20 @@
 package wr1ttenyu.f1nal.study.project.archetype.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import wr1ttenyu.f1nal.study.project.archetype.model.UserModel;
+import wr1ttenyu.f1nal.study.project.archetype.model.request.AddUserRequest;
 import wr1ttenyu.f1nal.study.project.archetype.service.UserService;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.response.CommonResponse;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+@Validated
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -16,7 +23,20 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/getUser")
-    public CommonResponse<UserModel> getUserInfoById(String id) {
+    public CommonResponse<UserModel> getUserInfoById(@NotNull(message="用户id不能为空") String id,
+         @NotNull(message="用户秘钥不能为空") String token) {
         return CommonResponse.successResponse(userService.getUserById(id));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/addUser")
+    public CommonResponse<String> addUser(@Valid AddUserRequest request) {
+        UserModel userModel = UserModel.convertReqToModel(request);
+        return CommonResponse.successResponse(userModel.getId());
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/addUserJson")
+    public CommonResponse<UserModel> addUserJson(@Valid @RequestBody AddUserRequest request) {
+        UserModel userModel = UserModel.convertReqToModel(request);
+        return CommonResponse.successResponse(userModel);
     }
 }

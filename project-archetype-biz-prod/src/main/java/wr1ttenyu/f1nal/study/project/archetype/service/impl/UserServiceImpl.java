@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel getUserById(String id) {
         UUser user = userMapper.selectByPrimaryKey(id);
-        BusinessExceptionEnum.USER_NOT_FOUND.assertNotNull(user);
+        BusinessExceptionEnum.USER_NOT_FOUND.assertNotNull(user, id);
         return UserModel.convertDoToModel(user);
     }
 

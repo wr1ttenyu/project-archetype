@@ -1,6 +1,11 @@
 package wr1ttenyu.f1nal.study.project.archetype.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import wr1ttenyu.f1nal.study.project.archetype.entity.UUser;
+import wr1ttenyu.f1nal.study.project.archetype.model.request.AddUserRequest;
+import wr1ttenyu.f1nal.study.project.archetype.util.UUIDGenerator;
+
+import java.time.LocalDateTime;
 
 public class UserModel {
 
@@ -9,6 +14,9 @@ public class UserModel {
     private String name;
 
     private Integer age;
+
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
 
     public static UUser convertModelToDo(UserModel model) {
         if (model == null) return null;
@@ -25,6 +33,16 @@ public class UserModel {
         user.setId(entity.getId());
         user.setAge(entity.getAge());
         user.setName(entity.getName());
+        return user;
+    }
+
+    public static UserModel convertReqToModel(AddUserRequest request) {
+        if (request == null) return null;
+        UserModel user = new UserModel();
+        user.setId(UUIDGenerator.generate());
+        user.setAge(request.getAge());
+        user.setName(request.getName());
+        user.setCreateTime(LocalDateTime.now());
         return user;
     }
 
@@ -52,12 +70,21 @@ public class UserModel {
         this.age = age;
     }
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", createTime=" + createTime +
                 '}';
     }
 }

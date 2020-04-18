@@ -36,6 +36,10 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEn
 import wr1ttenyu.f1nal.study.project.archetype.util.common.i18n.UnifiedMessageSource;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.response.ErrorResponse;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.Set;
+
 /**
  * <p>全局异常处理器</p>
  */
@@ -85,7 +89,6 @@ public class UnifiedExceptionHandler {
     @ResponseBody
     public ErrorResponse handleBusinessException(BaseException e) {
         log.error(e.getMessage(), e);
-
         return ErrorResponse.errorResponse(e.getResponseEnum(), getMessage(e));
     }
 
@@ -136,19 +139,36 @@ public class UnifiedExceptionHandler {
 
         if (ENV_PROD.equals(profile)) {
             // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如404.
-            serverError = CommonResponseEnum.SERVER_ERROR;
-            BaseException baseException = new BaseException(CommonResponseEnum.SERVER_ERROR);
-            String message = getMessage(baseException);
-            return ErrorResponse.errorResponse(serverError, message);
+            return ErrorResponse.errorResponse(CommonResponseEnum.SERVER_ERROR);
         }
 
         return ErrorResponse.errorResponse(serverError, e.getMessage());
     }
 
+    /**
+     * 参数校验异常
+     * ConstraintViolation 原生异常
+     * @Validated 标记整个 Controller 时，方法入参非自定义对象校验失败，抛出的异常
+     * @param e 异常
+     * @return 异常结果
+     */
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    @ResponseBody
+    public ErrorResponse handleException(ConstraintViolationException e) {
+        StringBuilder sb = new StringBuilder();
+        log.error(e.getMessage(), e);
+        Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+        constraintViolations.stream().forEach((va) -> sb.append("; ").append(va.getMessageTemplate()));
+        for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+            sb.append("; ").append(constraintViolation.getMessageTemplate());
+        }
+        return ErrorResponse.errorResponse(ArgumentExceptionEnum.VALID_ERROR, sb.toString().substring(2));
+    }
+
 
     /**
      * 参数绑定异常
-     *
+     * @Validated 抛出的 spring 自实现
      * @param e 异常
      * @return 异常结果
      */
@@ -161,7 +181,7 @@ public class UnifiedExceptionHandler {
 
     /**
      * 参数校验(Valid)异常，将校验失败的所有异常组合成一条错误信息
-     *
+     * @Valid jsr303
      * @param e 异常
      * @return 异常结果
      */
@@ -170,6 +190,24 @@ public class UnifiedExceptionHandler {
     public ErrorResponse handleValidException(MethodArgumentNotValidException e) {
         log.error("参数绑定校验异常", e);
         return wrapperBindingResult(e.getBindingResult());
+    }
+
+    /**
+     * 未定义异常
+     *
+     * @param e 异常
+     * @return 异常结果
+     */
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public ErrorResponse handleException(Exception e) {
+        log.error(e.getMessage(), e);
+        if (ENV_PROD.equals(profile)) {
+            // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.
+            return ErrorResponse.errorResponse(CommonResponseEnum.SERVER_ERROR);
+        }
+
+        return ErrorResponse.errorResponse(CommonResponseEnum.SERVER_ERROR, e.getMessage());
     }
 
     /**
@@ -187,31 +225,9 @@ public class UnifiedExceptionHandler {
                 msg.append(((FieldError) error).getField()).append(": ");
             }
             msg.append(error.getDefaultMessage() == null ? "" : error.getDefaultMessage());
-
         }
 
         return ErrorResponse.errorResponse(ArgumentExceptionEnum.VALID_ERROR, msg.substring(2));
-    }
-
-    /**
-     * 未定义异常
-     *
-     * @param e 异常
-     * @return 异常结果
-     */
-    @ExceptionHandler(value = Exception.class)
-    @ResponseBody
-    public ErrorResponse handleException(Exception e) {
-        log.error(e.getMessage(), e);
-
-        if (ENV_PROD.equals(profile)) {
-            // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.
-            BaseException baseException = new BaseException(CommonResponseEnum.SERVER_ERROR);
-            String message = getMessage(baseException);
-            return ErrorResponse.errorResponse(CommonResponseEnum.SERVER_ERROR, message);
-        }
-
-        return ErrorResponse.errorResponse(CommonResponseEnum.SERVER_ERROR, e.getMessage());
     }
 
 }

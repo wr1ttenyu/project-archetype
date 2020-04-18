@@ -17,25 +17,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import wr1ttenyu.f1nal.study.project.archetype.gracefulshutdown.GracefulShutdownUndertowWrapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableWebMvc
-public class AppWebConfiguration implements WebMvcConfigurer {
+public class AppWebConfiguration {
 
     @Autowired
     private GracefulShutdownUndertowWrapper gracefulShutdownUndertowWrapper;
 
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
+        FastJsonHttpMessageConverter jsonHttpMessageConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        List<MediaType> fastMediaTypes = new ArrayList<>();
-        fastMediaTypes.add(MediaType.APPLICATION_JSON);
-        fastConverter.setSupportedMediaTypes(fastMediaTypes);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        return new HttpMessageConverters(fastConverter);
+        jsonHttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON));
+        jsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
+        return new HttpMessageConverters(jsonHttpMessageConverter);
     }
 
     @Bean
