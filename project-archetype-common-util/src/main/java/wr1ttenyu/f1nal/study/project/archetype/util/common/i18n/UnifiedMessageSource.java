@@ -23,7 +23,7 @@ public class UnifiedMessageSource {
     }
 
     /**
-     * 获取国际化消息
+      * 获取国际化消息
      * @param code 消息code
      * @param args 参数
      * @return

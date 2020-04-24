@@ -24,6 +24,7 @@ public class UserModel {
         user.setId(model.getId());
         user.setAge(model.getAge());
         user.setName(model.getName());
+        user.setCreateTime(model.getCreateTime());
         return user;
     }
 
@@ -33,6 +34,7 @@ public class UserModel {
         user.setId(entity.getId());
         user.setAge(entity.getAge());
         user.setName(entity.getName());
+        user.setCreateTime(entity.getCreateTime());
         return user;
     }
 
