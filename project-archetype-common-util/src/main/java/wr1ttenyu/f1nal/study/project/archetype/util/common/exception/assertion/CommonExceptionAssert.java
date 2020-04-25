@@ -1,6 +1,7 @@
 package wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion;
 
 
+import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.ArgumentException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BaseException;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEnum;
 
@@ -22,4 +23,7 @@ public interface CommonExceptionAssert extends IResponseEnum, Assert {
         return new BaseException(this, args, msg, t);
     }
 
+    default BaseException doThrow() {
+        return new BaseException(this);
+    }
 }

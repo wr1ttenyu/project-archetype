@@ -9,6 +9,10 @@ public class ArgumentException extends BaseException {
 
     private static final long serialVersionUID = 1L;
 
+    public ArgumentException(IResponseEnum responseEnum) {
+        super(responseEnum);
+    }
+
     public ArgumentException(IResponseEnum responseEnum, Object[] args, String message) {
         super(responseEnum, args, message);
     }

@@ -25,4 +25,8 @@ public interface BusinessExceptionAssert extends IResponseEnum, Assert {
         return new BusinessException(this, args, msg, t);
     }
 
+    default BusinessException doThrow() {
+        return new BusinessException(this);
+    }
+
 }
