@@ -2,14 +2,14 @@ package wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.CommonExceptionAssert;
+import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.assertion.ArgumentExceptionAssert;
 
 /**
  * <p>参数校验异常返回结果</p>
  */
 @Getter
 @AllArgsConstructor
-public enum ArgumentExceptionEnum implements CommonExceptionAssert {
+public enum ArgumentExceptionEnum implements ArgumentExceptionAssert {
 
     /**
      * 绑定参数校验异常

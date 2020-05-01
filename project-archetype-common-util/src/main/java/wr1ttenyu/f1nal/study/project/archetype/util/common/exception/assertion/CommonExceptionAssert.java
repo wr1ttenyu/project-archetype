@@ -23,7 +23,4 @@ public interface CommonExceptionAssert extends IResponseEnum, Assert {
         return new BaseException(this, args, msg, t);
     }
 
-    default BaseException doThrow() {
-        return new BaseException(this);
-    }
 }

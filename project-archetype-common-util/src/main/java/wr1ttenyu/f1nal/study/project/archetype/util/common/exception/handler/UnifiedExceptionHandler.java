@@ -112,19 +112,19 @@ public class UnifiedExceptionHandler {
      * @return 异常结果
      */
     @ExceptionHandler({
-            NoHandlerFoundException.class,
-            HttpRequestMethodNotSupportedException.class,
-            HttpMediaTypeNotSupportedException.class,
-            HttpMediaTypeNotAcceptableException.class,
-            MissingPathVariableException.class,
-            MissingServletRequestParameterException.class,
-            TypeMismatchException.class,
-            HttpMessageNotReadableException.class,
-            HttpMessageNotWritableException.class,
-            ServletRequestBindingException.class,
-            ConversionNotSupportedException.class,
-            MissingServletRequestPartException.class,
-            AsyncRequestTimeoutException.class
+        NoHandlerFoundException.class,
+        HttpRequestMethodNotSupportedException.class,
+        HttpMediaTypeNotSupportedException.class,
+        HttpMediaTypeNotAcceptableException.class,
+        MissingPathVariableException.class,
+        MissingServletRequestParameterException.class,
+        TypeMismatchException.class,
+        HttpMessageNotReadableException.class,
+        HttpMessageNotWritableException.class,
+        ServletRequestBindingException.class,
+        ConversionNotSupportedException.class,
+        MissingServletRequestPartException.class,
+        AsyncRequestTimeoutException.class
     })
     @ResponseBody
     public ErrorResponse handleServletException(Exception e) {

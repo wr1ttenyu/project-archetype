@@ -65,19 +65,19 @@ public class OrderLifeManager implements BeanPostProcessor, OrderLife {
 
     @Override
     public OrderModel paySuccess(OrderModel orderModel) {
-        BusinessExceptionEnum.ORDER_EXECUTOR_NOT_SUPPORT.doThrow();
+        BusinessExceptionEnum.ORDER_EXECUTOR_NOT_SUPPORT.assertFail();
         return orderModel;
     }
 
     @Override
     public OrderModel inverseOrder(OrderModel orderModel) {
-        BusinessExceptionEnum.ORDER_EXECUTOR_NOT_SUPPORT.doThrow();
+        BusinessExceptionEnum.ORDER_EXECUTOR_NOT_SUPPORT.assertFail();
         return orderModel;
     }
 
     @Override
     public OrderModel refundOrder(OrderModel orderModel) {
-        BusinessExceptionEnum.ORDER_EXECUTOR_NOT_SUPPORT.doThrow();
+        BusinessExceptionEnum.ORDER_EXECUTOR_NOT_SUPPORT.assertFail();
         return orderModel;
     }
 
@@ -97,7 +97,7 @@ public class OrderLifeManager implements BeanPostProcessor, OrderLife {
             REFUND_EXECUTOR_CONTAINER.add((RefundOrderExecutor) bean);
         } else if (bean instanceof Executor) {
             LOGGER.error("未知订单生命周期处理器，请检查，beanName:{} bean:{}", beanName, bean);
-            BusinessExceptionEnum.NOT_KNOWN_ORDER_EXECUTOR.doThrow();
+            BusinessExceptionEnum.NOT_KNOWN_ORDER_EXECUTOR.assertFail();
         }
         return bean;
     }
