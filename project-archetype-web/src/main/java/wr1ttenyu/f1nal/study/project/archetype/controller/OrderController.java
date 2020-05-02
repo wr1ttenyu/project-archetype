@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import wr1ttenyu.f1nal.study.project.archetype.model.OrderModel;
-import wr1ttenyu.f1nal.study.project.archetype.model.enums.OrderType;
 import wr1ttenyu.f1nal.study.project.archetype.model.request.AddOrderRequest;
 import wr1ttenyu.f1nal.study.project.archetype.service.MPlusOrderService;
 import wr1ttenyu.f1nal.study.project.archetype.util.UUIDGenerator;
@@ -20,6 +19,15 @@ public class OrderController {
 
     @Autowired
     private MPlusOrderService mPlusOrderService;
+
+    @RequestMapping(method = RequestMethod.POST, path = "/createMPlusOrder2")
+    public CommonResponse<OrderModel> createMPlusOrder2(@Valid AddOrderRequest request) {
+        OrderModel orderModel = OrderModel.convertReqToModel(request);
+        orderModel.setOrderId(UUIDGenerator.generate());
+        mPlusOrderService.createMPlusOrder(orderModel);
+        return CommonResponse.successResponse(orderModel);
+    }
+
 
     @RequestMapping(method = RequestMethod.POST, path = "/createMPlusOrder")
     public CommonResponse<OrderModel> createMPlusOrder(@Valid @RequestBody AddOrderRequest request) {
