@@ -1,13 +1,17 @@
 package wr1ttenyu.f1nal.study.project.archetype.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UUser {
+
     private String id;
 
     private String name;
 
     private Integer age;
+
+    private LocalDate birthday;
 
     private LocalDateTime createTime;
 
@@ -43,12 +47,22 @@ public class UUser {
         this.createTime = createTime;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "UUser{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", birthday=" + birthday +
+                ", createTime=" + createTime +
                 '}';
     }
 }

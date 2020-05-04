@@ -1,6 +1,8 @@
 package wr1ttenyu.f1nal.study.project.archetype.model.request;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -14,6 +16,7 @@ public class AddUserRequest {
     @DecimalMin(value = "0")
     private Integer age;
 
+    @JSONField(format = "yyyy-MM-dd")
     private LocalDate birthday;
 
     private Boolean goodMan;
@@ -40,5 +43,13 @@ public class AddUserRequest {
 
     public void setGoodMan(Boolean goodMan) {
         this.goodMan = goodMan;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }

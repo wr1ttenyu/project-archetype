@@ -17,11 +17,13 @@ public enum BusinessExceptionEnum implements BusinessExceptionAssert {
      */
     USER_NOT_FOUND(4000, "用户不存在"),
 
-    NOT_KNOWN_ORDER_EXECUTOR(4001, "未知订单处理器，请检查"),
+    INVAILD_TOKEN(4001, "TOKEN无效"),
 
-    ORDER_EXECUTOR_NOT_FOUND(4002, "订单[{0}] 类型为[{1}] 执行[{2}]周期 处理器未找到，请检查"),
+    NOT_KNOWN_ORDER_EXECUTOR(4051, "未知订单处理器，请检查"),
 
-    ORDER_EXECUTOR_NOT_SUPPORT(4003, "订单[{0}] 类型为[{1}] 执行[{2}]周期的操作暂不支持，请谅解"),
+    ORDER_EXECUTOR_NOT_FOUND(4052, "订单[{0}] 类型为[{1}] 执行[{2}]周期 处理器未找到，请检查"),
+
+    ORDER_EXECUTOR_NOT_SUPPORT(4053, "订单[{0}] 类型为[{1}] 执行[{2}]周期的操作暂不支持，请谅解"),
 
     ;
 

@@ -5,6 +5,7 @@ import wr1ttenyu.f1nal.study.project.archetype.entity.UUser;
 import wr1ttenyu.f1nal.study.project.archetype.model.request.AddUserRequest;
 import wr1ttenyu.f1nal.study.project.archetype.util.UUIDGenerator;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class UserModel {
@@ -15,6 +16,9 @@ public class UserModel {
 
     private Integer age;
 
+    @JSONField(format = "yyyy-MM-dd")
+    private LocalDate birthday;
+
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
@@ -24,6 +28,7 @@ public class UserModel {
         user.setId(model.getId());
         user.setAge(model.getAge());
         user.setName(model.getName());
+        user.setBirthday(model.getBirthday());
         user.setCreateTime(model.getCreateTime());
         return user;
     }
@@ -34,6 +39,7 @@ public class UserModel {
         user.setId(entity.getId());
         user.setAge(entity.getAge());
         user.setName(entity.getName());
+        user.setBirthday(entity.getBirthday());
         user.setCreateTime(entity.getCreateTime());
         return user;
     }
@@ -44,6 +50,7 @@ public class UserModel {
         user.setId(UUIDGenerator.generate());
         user.setAge(request.getAge());
         user.setName(request.getName());
+        user.setBirthday(request.getBirthday());
         user.setCreateTime(LocalDateTime.now());
         return user;
     }
@@ -80,12 +87,21 @@ public class UserModel {
         this.createTime = createTime;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", birthday=" + birthday +
                 ", createTime=" + createTime +
                 '}';
     }

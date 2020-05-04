@@ -30,13 +30,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserModel getUserById(String id) {
         UUser user = userMapper.selectByPrimaryKey(id);
-        UserModel model = new UserModel();
-        model.setId(UUIDGenerator.generate());
-        model.setName("wr2www");
-        model.setAge(15);
-        model.setCreateTime(LocalDateTime.now());
-        insertUserRecord(model);
-        testInsert();
         BusinessExceptionEnum.USER_NOT_FOUND.assertNotNull(user, id);
         return UserModel.convertDoToModel(user);
     }

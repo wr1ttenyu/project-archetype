@@ -1,4 +1,4 @@
-package wr1ttenyu.f1nal.study.project.archetype.config;
+package wr1ttenyu.f1nal.study.project.archetype.web;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
@@ -9,22 +9,42 @@ import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
-import org.springframework.web.context.ConfigurableWebApplicationContext;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import wr1ttenyu.f1nal.study.project.archetype.gracefulshutdown.GracefulShutdownUndertowWrapper;
+import wr1ttenyu.f1nal.study.project.archetype.web.utils.LocalDateFormatter;
+import wr1ttenyu.f1nal.study.project.archetype.web.utils.token.CurrentUserMethodArgumentResolver;
+import wr1ttenyu.f1nal.study.project.archetype.web.utils.token.TokenHandleInterceptor;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-public class AppWebConfiguration {
+public class AppWebConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private GracefulShutdownUndertowWrapper gracefulShutdownUndertowWrapper;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TokenHandleInterceptor()).addPathPatterns("/**");
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(new CurrentUserMethodArgumentResolver());
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new LocalDateFormatter());
+    }
 
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {

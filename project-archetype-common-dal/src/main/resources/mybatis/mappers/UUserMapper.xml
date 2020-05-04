@@ -5,10 +5,11 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, age
+    id, name, age, birthday, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -27,9 +28,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="wr1ttenyu.f1nal.study.project.archetype.entity.UUser">
-    insert into u_user (id, name, age, create_time
+    insert into u_user (id, name, age, birthday, create_time
       )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{birthday,jdbcType=DATE},
+        #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="wr1ttenyu.f1nal.study.project.archetype.entity.UUser">
@@ -44,6 +46,9 @@
       <if test="age != null">
         age,
       </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -57,6 +62,9 @@
       </if>
       <if test="age != null">
         #{age,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
