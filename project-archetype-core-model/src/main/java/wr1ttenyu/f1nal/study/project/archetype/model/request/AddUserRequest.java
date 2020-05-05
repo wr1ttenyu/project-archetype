@@ -6,6 +6,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class AddUserRequest {
 
@@ -19,7 +20,9 @@ public class AddUserRequest {
     @JSONField(format = "yyyy-MM-dd")
     private LocalDate birthday;
 
-    private Boolean goodMan;
+    private LocalDateTime deadTime;
+
+    private Boolean male;
 
     public String getName() {
         return name;
@@ -37,12 +40,12 @@ public class AddUserRequest {
         this.age = age;
     }
 
-    public Boolean getGoodMan() {
-        return goodMan;
+    public Boolean getMale() {
+        return male;
     }
 
-    public void setGoodMan(Boolean goodMan) {
-        this.goodMan = goodMan;
+    public void setMale(Boolean male) {
+        this.male = male;
     }
 
     public LocalDate getBirthday() {
@@ -51,5 +54,13 @@ public class AddUserRequest {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public LocalDateTime getDeadTime() {
+        return deadTime;
+    }
+
+    public void setDeadTime(LocalDateTime deadTime) {
+        this.deadTime = deadTime;
     }
 }
