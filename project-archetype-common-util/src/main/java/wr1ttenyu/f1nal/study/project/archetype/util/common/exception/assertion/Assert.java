@@ -4,6 +4,7 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.BaseExcepti
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * <p>枚举类异常断言，提供简便的方式判断条件，并在条件满足时抛出异常</p>
@@ -293,5 +294,19 @@ public interface Assert {
         if (!o1.equals(o2)) {
             throw newException(args);
         }
+    }
+
+    /**
+     * <p>断言对象<code>o1</code>是否满足Predicate函数的校验
+     * 如果不满足，则抛出异常
+     *
+     * @param o1 待判断对象，
+     * @param predicate  断言函数
+     * @param args message占位符对应的参数列表
+     */
+    default void assertByPredicate(Object o1, Predicate predicate, Object... args) {
+        boolean res = predicate.test(o1);
+        if (res) return;
+        throw newException(args);
     }
 }
