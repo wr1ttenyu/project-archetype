@@ -36,6 +36,7 @@ import wr1ttenyu.f1nal.study.project.archetype.util.common.exception.IResponseEn
 import wr1ttenyu.f1nal.study.project.archetype.util.common.i18n.UnifiedMessageSource;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.response.ErrorResponse;
 
+import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Set;
@@ -59,8 +60,13 @@ public class UnifiedExceptionHandler {
     /**
      * 当前环境
      */
-    @Value("${spring.profiles.active}")
+    @Value("${spring.profiles.active:}")
     private String profile;
+
+    @PostConstruct
+    public void test() {
+        System.out.println("------------------------------" + profile);
+    }
 
     /**
      * 获取国际化消息

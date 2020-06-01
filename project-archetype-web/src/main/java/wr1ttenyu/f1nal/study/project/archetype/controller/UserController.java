@@ -10,6 +10,7 @@ import wr1ttenyu.f1nal.study.project.archetype.model.TokenModel;
 import wr1ttenyu.f1nal.study.project.archetype.model.UserModel;
 import wr1ttenyu.f1nal.study.project.archetype.model.request.AddUserRequest;
 import wr1ttenyu.f1nal.study.project.archetype.service.UserService;
+import wr1ttenyu.f1nal.study.project.archetype.service.mq.UserInfoToMqService;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.response.CommonResponse;
 import wr1ttenyu.f1nal.study.project.archetype.web.utils.token.TokenManager;
 import wr1ttenyu.f1nal.study.project.archetype.web.utils.token.TokenValid;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserInfoToMqService userInfoToMqService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/getUser")
     public CommonResponse<UserModel> getUserInfoById(@NotNull(message="用户id不能为空") String id) {
@@ -41,6 +45,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, path = "/addUser")
     public CommonResponse<String> addUser(@Valid AddUserRequest request) {
         UserModel userModel = UserModel.convertReqToModel(request);
+        userInfoToMqService.sendUserInfoMsg(userModel);
         return CommonResponse.successResponse(userModel.getId());
     }
 

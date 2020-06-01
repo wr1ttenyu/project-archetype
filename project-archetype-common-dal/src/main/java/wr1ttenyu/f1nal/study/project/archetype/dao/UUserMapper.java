@@ -1,6 +1,5 @@
 package wr1ttenyu.f1nal.study.project.archetype.dao;
 
-import org.apache.ibatis.annotations.Param;
 import wr1ttenyu.f1nal.study.project.archetype.entity.UUser;
 
 import java.util.List;
