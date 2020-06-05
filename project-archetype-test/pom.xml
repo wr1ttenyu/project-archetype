@@ -27,27 +27,17 @@
         </dependency>
     </dependencies>
 
-    <!--<build>
+    <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <excludeGroupIds>org.projectlombok</excludeGroupIds>
-                    &lt;!&ndash; 如果将这个配置设置为 true，打包出来的 jar/war 就是 可执行 的了, 可以作为服务在linux中启动，
-                         完全可执行 的 jar/war 在文件前面嵌入了个 额外的脚本，这就使得有些命令会执行失败，比如 jar -xf
-                         将Spring Boot项目打包部署，如果使用 jar -xf 等解压命令，一定要注意
-                         springboot的maven插件 spring-boot-maven-plugin 的 executable 配置一定要设置为 false &ndash;&gt;
-                    <executable>false</executable>
+                    <!-- 因为springboot打出的jar包不是规则jar包，test中引入web工程中的类，在install的时候在web jar中找不到
+                        所以跳过编译 test 工程中的代码-->
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 </project>

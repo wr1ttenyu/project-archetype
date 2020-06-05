@@ -1,9 +1,9 @@
 package wr1ttenyu.f1nal.study.project.archetype.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import wr1ttenyu.f1nal.study.project.archetype.entity.UUser;
+import wr1ttenyu.f1nal.study.entity.UUser;
 import wr1ttenyu.f1nal.study.project.archetype.model.request.AddUserRequest;
-import wr1ttenyu.f1nal.study.project.archetype.util.UUIDGenerator;
+import wr1ttenyu.f1nal.study.util.UUIDGenerator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

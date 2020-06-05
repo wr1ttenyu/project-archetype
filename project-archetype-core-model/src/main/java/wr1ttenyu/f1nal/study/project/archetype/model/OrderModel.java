@@ -1,6 +1,5 @@
 package wr1ttenyu.f1nal.study.project.archetype.model;
 
-import wr1ttenyu.f1nal.study.project.archetype.entity.UUser;
 import wr1ttenyu.f1nal.study.project.archetype.model.enums.OrderType;
 import wr1ttenyu.f1nal.study.project.archetype.model.request.AddOrderRequest;
 
