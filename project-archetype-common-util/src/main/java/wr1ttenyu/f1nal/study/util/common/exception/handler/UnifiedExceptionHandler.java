@@ -64,7 +64,7 @@ public class UnifiedExceptionHandler {
 
     @PostConstruct
     public void test() {
-        System.out.println("------------------------------" + profile);
+        System.out.println("当前 spring profile 配置为：" + profile);
     }
 
     /**

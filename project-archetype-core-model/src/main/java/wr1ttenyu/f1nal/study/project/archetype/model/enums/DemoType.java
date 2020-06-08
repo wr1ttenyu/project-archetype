@@ -1,14 +1,14 @@
 package wr1ttenyu.f1nal.study.project.archetype.model.enums;
 
-public enum OrderType {
+public enum DemoType {
 
-    TICKET_CHARGE("TICKET_CHARGE"),
+    TYPE1("TYPE1"),
 
-    M_PLUS_CREATE("M_PLUS_CREATE");
+    TYPE2("TYPE2");
 
     private String type;
 
-    OrderType(String type) {
+    DemoType(String type) {
         this.type = type;
     }
 }

@@ -1,12 +1,11 @@
 package wr1ttenyu.f1nal.study;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication(scanBasePackages = "wr1ttenyu.f1nal.study")
-@MapperScan("wr1ttenyu.f1nal.study.dao")
+/*@MapperScan("wr1ttenyu.f1nal.study.dao")*/
 @EnableAspectJAutoProxy(exposeProxy = true)
 public class Application {
 

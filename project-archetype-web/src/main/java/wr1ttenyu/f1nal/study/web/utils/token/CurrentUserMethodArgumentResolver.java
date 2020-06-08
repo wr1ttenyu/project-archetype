@@ -14,7 +14,7 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        // 检查该解析器是否支持参数类型 ，如果方法的参数里有 参数类型  UserModel 则返回true
+        // 检查该解析器是否支持参数类型 ，如果方法的参数里有 参数类型  SayHiModel 则返回true
         if (methodParameter.getParameterType().equals(UserModel.class)) return true;
         return false;
     }
