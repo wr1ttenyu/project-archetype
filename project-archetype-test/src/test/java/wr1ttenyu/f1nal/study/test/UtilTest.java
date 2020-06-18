@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 import wr1ttenyu.f1nal.study.util.UUIDGenerator;
 
-@RunWith(SpringRunner.class)
-public class UtilTest {
+
+public class UtilTest extends BaseTest {
 
     @Test
     public void testUUIDGenerator() {

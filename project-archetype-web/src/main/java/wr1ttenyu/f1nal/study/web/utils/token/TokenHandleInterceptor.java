@@ -16,6 +16,7 @@ public class TokenHandleInterceptor implements HandlerInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(TokenHandleInterceptor.class);
 
+    // TODO 通过反射获取类或者方法的注解 是否会比较慢 如果慢 用下面的缓存能否解决
     private static final Map<Class, Object> HAS_TOKEN_CLASS_CACHE = new ConcurrentHashMap<>();
     private static final Map<HandlerMethod, Object> HAS_TOKEN_METHOD_CACHE = new ConcurrentHashMap<>();
 
