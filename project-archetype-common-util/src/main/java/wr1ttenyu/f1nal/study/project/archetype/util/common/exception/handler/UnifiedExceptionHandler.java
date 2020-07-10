@@ -63,11 +63,6 @@ public class UnifiedExceptionHandler {
     @Value("${spring.profiles.active:}")
     private String profile;
 
-    @PostConstruct
-    public void test() {
-        System.out.println("------------------------------" + profile);
-    }
-
     /**
      * 获取国际化消息
      *

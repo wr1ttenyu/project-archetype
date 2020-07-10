@@ -2,7 +2,6 @@ package wr1ttenyu.f1nal.study.project.archetype.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,6 +11,7 @@ import wr1ttenyu.f1nal.study.project.archetype.dao.UUserMapper;
 import wr1ttenyu.f1nal.study.project.archetype.entity.UUser;
 import wr1ttenyu.f1nal.study.project.archetype.model.UserModel;
 import wr1ttenyu.f1nal.study.project.archetype.service.UserService;
+import wr1ttenyu.f1nal.study.project.archetype.util.LogMonitor;
 import wr1ttenyu.f1nal.study.project.archetype.util.UUIDGenerator;
 import wr1ttenyu.f1nal.study.project.archetype.util.common.constant.enums.BusinessExceptionEnum;
 
@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UUserMapper userMapper;
 
+    @LogMonitor
     @Override
     @Transactional
     public UserModel getUserById(String id) {
